@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace ChinookSystem.ViewModels
 {
-    class Class1
+    //Must be public.....Accessible 
+    public class SelectionList
     {
+        public int ValueId { get; set; }
+        public string DisplayText { get; set; }
     }
 }
