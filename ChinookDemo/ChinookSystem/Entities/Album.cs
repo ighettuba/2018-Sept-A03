@@ -45,7 +45,11 @@ namespace ChinookSystem.Entities
         
         //the relationship in Album is child to parent(1:1)
         public virtual Artist Artist { get; set; }
-        
+
+
+        //the relationship in Album is parent to child(1:m)
+
+        public virtual ICollection<Track> Tracks { get; set; }
 
         //constructors
 

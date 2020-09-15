@@ -44,6 +44,7 @@ namespace ChinookSystem.Entities
         // Navigational Properties
         //the relationship in Artist is parent to child(1:m)
         public virtual ICollection<Album> Albums { get; set; }
+        public virtual ICollection<Track> Tracks { get; set; }
         //constructor area
 
         //behaviour area
