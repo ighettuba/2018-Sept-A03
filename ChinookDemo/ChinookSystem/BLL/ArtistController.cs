@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 #region Additional Namespaces
 using ChinookSystem.DAL;
 using ChinookSystem.Entities;
-using System.ComponentModel;
+using System.ComponentModel; //needed for wizard impllementation of ObjecDataSource
 using ChinookSystem.ViewModels;
 #endregion
 namespace ChinookSystem.BLL
 {
     //Must be public.....Accessible 
+    //expose the library class for the wizard
+    [DataObject]
     public class ArtistController
     {
+        //expose the class method for the wizard
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
         public List <SelectionList> Artist_List()
         {
             using (var context = new ChinookSystemContext())

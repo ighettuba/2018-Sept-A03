@@ -25,7 +25,7 @@ namespace ChinookSystem.BLL
                               {
                                   AlbumId = x.AlbumId,
                                   Title = x.Title,
-                                  ArtistID = x.ArtistID,
+                                  ArtistId = x.ArtistID,
                                   ReleaseYear = x.ReleaseYear,
                                   ReleaseLabel = x.ReleaseLabel
                               };
