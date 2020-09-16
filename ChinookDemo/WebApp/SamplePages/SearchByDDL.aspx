@@ -14,18 +14,23 @@
         <br /><br />
     <div class ="row">
         <asp:GridView ID="AlbumArtistList" runat="server"
-            CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" AutoGenerateColumns="false">
+            CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" AutoGenerateColumns="false" OnSelectedIndexChanged="AlbumArtistList_SelectedIndexChanged">
             <Columns>
-                <asp:TemplateField HeaderText="ID">
+                <asp:CommandField SelectText="View" ShowSelectButton="True">
+
+                </asp:CommandField>
+                <asp:TemplateField HeaderText="ID" Visible="false">
                     <ItemTemplate>
-                        <asp:Label ID="Label2" runat="server" Text='<%#Eval("AlbumId") %>'></asp:Label>
+                        <asp:Label ID="AlbumId" runat="server" 
+                            Text='<%#Eval("AlbumId") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Right"></ItemStyle>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Title">
                     <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" Text='<%#Eval("Title") %>'></asp:Label>
+                        <asp:Label ID="Label3" runat="server" 
+                            Text='<%#Eval("Title") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                 </asp:TemplateField>
@@ -48,14 +53,16 @@
 
                 <asp:TemplateField HeaderText="Year Released">
                     <ItemTemplate>
-                        <asp:Label ID="Label6" runat="server" Text='<%#Eval("ReleaseYear") %>'></asp:Label>
+                        <asp:Label ID="Label6" runat="server" 
+                            Text='<%#Eval("ReleaseYear") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
                 </asp:TemplateField>
 
                 <asp:TemplateField HeaderText="Label">
                     <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" Text='<%#Eval("ReleaseLabel") %>'></asp:Label>
+                        <asp:Label ID="Label5" runat="server" 
+                            Text='<%#Eval("ReleaseLabel") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
                 </asp:TemplateField>
