@@ -91,7 +91,7 @@ namespace ChinookSystem.BLL
                     ReleaseLabel = item.ReleaseLabel
                 };
                 context.Albums.Add(addItem);
-                context.SaveChanges();
+                context.SaveChanges(); //causes entity validation to run
             }
         }
         [DataObjectMethod(DataObjectMethodType.Update, false)]
@@ -110,22 +110,23 @@ namespace ChinookSystem.BLL
                     ReleaseLabel = item.ReleaseLabel
                 };
                 context.Entry(updateItem).State = System.Data.Entity.EntityState.Modified;
-                    context.SaveChanges();
+                    context.SaveChanges(); //causes entity validation to run
             }
         }
-        [DataObjectMethod(DataObjectMethodType.Update, false)]
+        [DataObjectMethod(DataObjectMethodType.Delete, false)]
         public void Album_Delete(AlbumList item)
         {
-            Album_Delete(item.AlbumId);
-           
+            Album_Delete(item.AlbumId);           
         }
+
+
         public void Album_Delete(int albumID)
         {
             using (var context = new ChinookSystemContext())
             {
                 var exists = context.Albums.Find(albumID);
                 context.Albums.Remove(exists);
-                context.SaveChanges();
+                context.SaveChanges(); //causes entity validation to run
             }
         }
         #endregion

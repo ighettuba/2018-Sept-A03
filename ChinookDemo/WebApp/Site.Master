@@ -107,6 +107,10 @@
                                         href="~/SamplePages/SearchByDDL.aspx"
                                         style="color:black" runat="server">
                                    Search By Artist</a>
+                                 <a class="dropdown-item"
+                                        href="~/SamplePages/ListViewODSCRUD.aspx"
+                                        style="color:black" runat="server">
+                                   List View CRUD</a>
                             </div>
                          </li>
                          <li class="nav-item">
