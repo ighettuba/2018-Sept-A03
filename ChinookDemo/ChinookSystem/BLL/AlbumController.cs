@@ -23,12 +23,12 @@ namespace ChinookSystem.BLL
             using (var context = new ChinookSystemContext())
             {
                 var results = from x in context.Albums
-                              where x.ArtistID == artistid
+                              where x.ArtistId == artistid
                               select new AlbumArtist
                               {
                                   AlbumId = x.AlbumId,
                                   Title = x.Title,
-                                  ArtistId = x.ArtistID,
+                                  ArtistId = x.ArtistId,
                                   ReleaseYear = x.ReleaseYear,
                                   ReleaseLabel = x.ReleaseLabel
                               };
@@ -47,7 +47,7 @@ namespace ChinookSystem.BLL
                               {
                                   AlbumId = x.AlbumId,
                                   Title = x.Title,
-                                  ArtistId = x.ArtistID,
+                                  ArtistId = x.ArtistId,
                                   ReleaseYear = x.ReleaseYear,
                                   ReleaseLabel = x.ReleaseLabel
                               };
@@ -67,7 +67,7 @@ namespace ChinookSystem.BLL
                               {
                                   AlbumId = x.AlbumId,
                                   Title = x.Title,
-                                  ArtistId = x.ArtistID,
+                                  ArtistId = x.ArtistId,
                                   ReleaseYear = x.ReleaseYear,
                                   ReleaseLabel = x.ReleaseLabel
                               }).FirstOrDefault();
@@ -86,7 +86,7 @@ namespace ChinookSystem.BLL
                 Album addItem = new Album
                 {
                     Title = item.Title,
-                    ArtistID = item.ArtistId,
+                    ArtistId = item.ArtistId,
                     ReleaseYear = item.ReleaseYear,
                     ReleaseLabel = item.ReleaseLabel
                 };
@@ -105,7 +105,7 @@ namespace ChinookSystem.BLL
                 {
                     AlbumId = item.AlbumId,
                     Title = item.Title,
-                    ArtistID = item.ArtistId,
+                    ArtistId = item.ArtistId,
                     ReleaseYear = item.ReleaseYear,
                     ReleaseLabel = item.ReleaseLabel
                 };

@@ -1,13 +1,20 @@
 ﻿<%@ Page Title="Listview ODS CRUD" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ListViewODSCRUD.aspx.cs" Inherits="WebApp.SamplePages.ListViewODSCRUD" %>
+
+<%@ Register Src="~/UserControls/MessageUserControl.ascx" TagPrefix="uc1" TagName="MessageUserControl" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <h1>Single Control ODS CRUD : LitView</h1>
     <blockquote>
         This sample will use the asp: ListView control. <br />
         This sample will use ObectDataSource for the control.<br />
         This sample will use minimal code behind.<br />
-        This sample will demonstrate the use of the course supplied error handling control
+        This sample will demonstrate the use of the course supplied error handling control<br />
         This sample will demonstrate validation on a ListView CRUD
     </blockquote>
+    <div class="row">
+        <%-- using the MessageUserControl to handle erros on a web page --%>
+        <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
+    </div>
     <div class="row">
         <div class="offset-1">
 <%--             remember to use the attribute DataKeyNames to get the delete to work--%>
