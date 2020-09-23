@@ -14,6 +14,12 @@
     <div class="row">
         <%-- using the MessageUserControl to handle erros on a web page --%>
         <uc1:MessageUserControl runat="server" ID="MessageUserControl" />
+        <asp:ValidationSummary ID="ValidationSummaryInsert" runat="server" 
+            HeaderText="Following are concerns with your data: "
+            ValidationGroup="igroup"/>
+        <asp:ValidationSummary ID="ValidationSummaryEdit" runat="server"
+            HeaderText="Following are concerns with your data: "
+            ValidationGroup="egroup"/>
     </div>
     <div class="row">
         <div class="offset-1">
@@ -36,7 +42,6 @@
                             DataTextField="DisplayText" 
                             DataValueField="ValueId"
                             selectedValue='<%# Bind("ArtistId") %>'
-                            Enabled ="false"
                             Width ="300px">                        
                             
                         </asp:DropDownList></td>
@@ -45,18 +50,41 @@
                         <td>
                             <asp:Label Text='<%# Eval("ReleaseLabel") %>' runat="server" ID="ReleaseLabelLabel" Width="30px"/></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
+                            <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" 
+                                OnClientClick="Return confirm(Are you sure you wish to remove?)"/>
                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
                         </td>
                     </tr>
                 </AlternatingItemTemplate>
                 <EditItemTemplate>
+                    <asp:RequiredFieldValidator ID="RequiredTitleTextBoxE" runat="server"
+                        ErrorMessage="Title is required" 
+                        Display="None"
+                        ControlToValidate="TitleTextBoxE" 
+                        ValidationGroup="egroup">
+                    </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegExTitleTextBoxE" runat="server" 
+                        ErrorMessage="Title is limited to 160 characters" 
+                        Display="None" 
+                        ControlToValidate="TitleTextBoxE" 
+                        ValidationGroup="egroup" 
+                        ValidationExpression="^.{1,160}$">
+                    </asp:RegularExpressionValidator>
+                         <asp:RequiredFieldValidator ID="RequiredReleasedYearTextboxE" runat="server"
+                        ErrorMessage="Year is required" 
+                        Display="None"
+                        ControlToValidate="ReleasedYearTextboxE" 
+                        ValidationGroup="egroup">
+                    </asp:RequiredFieldValidator>
+                    <asp:RangeValidator ID="RangeReleasedYearTextboxE" runat="server"  MinimumValue="1950" MaximumValue="<%#DateTime.Today.Year %>"
+                        ErrorMessage="Release year must be between 1950 and now"  ControlToValidate="ReleasedYearTextboxE" 
+                        ValidationGroup="egroup"></asp:RangeValidator>
                     <tr style="background-color: #999999;">
                        
                         <td>
                             <asp:TextBox Text='<%# Bind("AlbumId") %>' runat="server" ID="AlbumIdTextBox" Width="30px" Enabled ="false"/></td>
                         <td>
-                            <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBox" /></td>
+                            <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBoxE" /></td>
                         <td>
                                 <asp:DropDownList ID="ArtistList" runat="server" 
                             DataSourceID="ArtistListODS" 
@@ -67,11 +95,11 @@
                             
                         </asp:DropDownList></td>
                         <td>
-                            <asp:TextBox Text='<%# Bind("ReleaseYear") %>' runat="server" ID="ReleaseYearTextBox" /></td>
+                            <asp:TextBox Text='<%# Bind("ReleaseYear") %>' runat="server" ID="ReleasedYearTextboxE" /></td>
                         <td>
-                            <asp:TextBox Text='<%# Bind("ReleaseLabel") %>' runat="server" ID="ReleaseLabelTextBox" /></td>
+                            <asp:TextBox Text='<%# Bind("ReleaseLabel") %>' runat="server" ID="ReleaseLabelTextBoxE" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" />
+                            <asp:Button runat="server" CommandName="Update" Text="Update" ID="UpdateButton" ValidationGroup="egroup"/>
                             <asp:Button runat="server" CommandName="Cancel" Text="Cancel" ID="CancelButton" />
                         </td>
                     </tr>
@@ -84,28 +112,51 @@
                     </table>
                 </EmptyDataTemplate>
                 <InsertItemTemplate>
+                    <asp:RequiredFieldValidator ID="RequiredTitleTextBoxI" runat="server"
+                        ErrorMessage="Title is required" 
+                        Display="None"
+                        ControlToValidate="TitleTextBoxI" 
+                        ValidationGroup="igroup">
+                    </asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="RegExTitleTextBoxI" runat="server" 
+                        ErrorMessage="Title is limited to 160 characters" 
+                        Display="None" 
+                        ControlToValidate="TitleTextBoxI" 
+                        ValidationGroup="igroup" 
+                        ValidationExpression="^.{1,160}$">
+                    </asp:RegularExpressionValidator>
+                         <asp:RequiredFieldValidator ID="RequiredReleasedYearTextboxI" runat="server"
+                        ErrorMessage="Year is required" 
+                        Display="None"
+                        ControlToValidate="ReleaseYearTextboxI" 
+                        ValidationGroup="igroup">
+                    </asp:RequiredFieldValidator>
+                    <asp:RangeValidator ID="RangeReleasedYearTextboxE" runat="server" MinimumValue="1950" MaximumValue="<%#DateTime.Today.Year %>"
+                        ErrorMessage="Release year must be between 1950 and now" 
+                        Display="None" 
+                        ControlToValidate="ReleaseYearTextboxI" 
+                        ValidationGroup="igroup" ></asp:RangeValidator>
                     <tr style="">
                        
                         <td>
                             <asp:TextBox Text='<%# Bind("AlbumId") %>' runat="server" ID="AlbumIdTextBox" Width="30px" Enabled ="false"/></td>
                         <td>
-                            <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBox" /></td>
+                            <asp:TextBox Text='<%# Bind("Title") %>' runat="server" ID="TitleTextBoxI" /></td>
                         <td>
                          <asp:DropDownList ID="ArtistList" runat="server" 
                             DataSourceID="ArtistListODS" 
                             DataTextField="DisplayText" 
                             DataValueField="ValueId"
                              selectedValue='<%# Bind("ArtistId") %>'
-                            Enabled ="false"
                             Width ="300px">                        
                             
                         </asp:DropDownList></td>
                         <td>
-                            <asp:TextBox Text='<%# Bind("ReleaseYear") %>' runat="server" ID="ReleaseYearTextBox" /></td>
+                            <asp:TextBox Text='<%# Bind("ReleaseYear") %>' runat="server" ID="ReleaseYearTextBoxI" /></td>
                         <td>
-                            <asp:TextBox Text='<%# Bind("ReleaseLabel") %>' runat="server" ID="ReleaseLabelTextBox" /></td> 
+                            <asp:TextBox Text='<%# Bind("ReleaseLabel") %>' runat="server" ID="ReleaseLabelTextBoxI" /></td> 
                         <td>
-                            <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" />
+                            <asp:Button runat="server" CommandName="Insert" Text="Insert" ID="InsertButton" ValidationGroup="igroup"/>
                             <asp:Button runat="server" CommandName="Cancel" Text="Clear" ID="CancelButton" />
                         </td>
                     </tr>
@@ -123,7 +174,6 @@
                             DataTextField="DisplayText" 
                             DataValueField="ValueId"
                             selectedValue='<%# Bind("ArtistId") %>'
-                            Enabled ="false"
                             Width ="300px">                        
                             
                         </asp:DropDownList></td>
@@ -132,7 +182,8 @@
                         <td>
                             <asp:Label Text='<%# Eval("ReleaseLabel") %>' runat="server" ID="ReleaseLabelLabel" /></td>
                         <td>
-                            <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" />
+                            <asp:Button runat="server" CommandName="Delete" Text="Delete" ID="DeleteButton" 
+                                OnClientClick="Return confirm(Are you sure you wish to remove?)"/>
                             <asp:Button runat="server" CommandName="Edit" Text="Edit" ID="EditButton" />
                         </td>
                     </tr>
@@ -159,9 +210,17 @@
                             <td runat="server" style="text-align: center; background-color: #5D7B9D; font-family: Verdana, Arial, Helvetica, sans-serif; color: #FFFFFF">
                                 <asp:DataPager runat="server" ID="DataPager1">
                                     <Fields>
-                                        <asp:NextPreviousPagerField ButtonType="Button" ShowFirstPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False"></asp:NextPreviousPagerField>
+                                        <asp:NextPreviousPagerField ButtonType="Button"
+                                            ShowFirstPageButton="True"
+                                            ShowNextPageButton="False"
+                                            ShowPreviousPageButton="False"
+                                            ButtonCssClass="datapagerStyle"></asp:NextPreviousPagerField>
                                         <asp:NumericPagerField></asp:NumericPagerField>
-                                        <asp:NextPreviousPagerField ButtonType="Button" ShowLastPageButton="True" ShowNextPageButton="False" ShowPreviousPageButton="False"></asp:NextPreviousPagerField>
+                                        <asp:NextPreviousPagerField ButtonType="Button"
+                                            ShowLastPageButton="True"
+                                            ShowNextPageButton="False"
+                                            ShowPreviousPageButton="False"
+                                            ButtonCssClass="datapagerStyle"></asp:NextPreviousPagerField>
                                     </Fields>
                                 </asp:DataPager>
                             </td>
