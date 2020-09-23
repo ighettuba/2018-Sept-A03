@@ -167,7 +167,10 @@
         UpdateMethod="Album_Update"
         OldValuesParameterFormatString="original_{0}"        
         TypeName="ChinookSystem.BLL.AlbumController" 
-       >
+         OnDeleted="DeleteCheckForException"
+         OnInserted="InsertCheckForException"
+         OnSelected="SelectCheckForException"
+         OnUpdated="UpdateCheckForException">
 
         <SelectParameters>
             <asp:Parameter DefaultValue="0" Name="artistid" Type="Int32"></asp:Parameter>
@@ -177,7 +180,8 @@
     <asp:ObjectDataSource ID="ArtistListODS" runat="server" 
         OldValuesParameterFormatString="original_{0}" 
         SelectMethod="Artist_List" 
-        TypeName="ChinookSystem.BLL.ArtistController">
+        TypeName="ChinookSystem.BLL.ArtistController"
+         OnSelected="SelectCheckForException">
 
             </asp:ObjectDataSource>
 </asp:Content>
