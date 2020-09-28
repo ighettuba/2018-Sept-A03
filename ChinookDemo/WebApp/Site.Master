@@ -112,6 +112,10 @@
                                         href="~/SamplePages/ListViewODSCRUD.aspx"
                                         style="color:black" runat="server">
                                    List View CRUD</a>
+                                 <a class="dropdown-item"
+                                        href="~/SamplePages/GridViewODS.aspx"
+                                        style="color:black" runat="server">
+                                   Grid View Using ODS</a>
                             </div>
                          </li>
                          <li class="nav-item">
