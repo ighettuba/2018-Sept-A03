@@ -16,12 +16,10 @@
         <asp:GridView ID="AlbumArtistList" runat="server"
             CssClass="table table-striped" GridLines="Horizontal" BorderStyle="None" AutoGenerateColumns="false" OnSelectedIndexChanged="AlbumArtistList_SelectedIndexChanged">
             <Columns>
-                <asp:CommandField SelectText="View" ShowSelectButton="True">
-
-                </asp:CommandField>
+                <asp:CommandField SelectText="View" ShowSelectButton="True"></asp:CommandField>
                 <asp:TemplateField HeaderText="ID" Visible="false">
                     <ItemTemplate>
-                        <asp:Label ID="AlbumId" runat="server" 
+                        <asp:Label ID="AlbumId" runat="server"
                             Text='<%#Eval("AlbumId") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Right"></ItemStyle>
@@ -29,7 +27,7 @@
 
                 <asp:TemplateField HeaderText="Title">
                     <ItemTemplate>
-                        <asp:Label ID="Label3" runat="server" 
+                        <asp:Label ID="Label3" runat="server"
                             Text='<%#Eval("Title") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
@@ -37,15 +35,14 @@
 
                 <asp:TemplateField HeaderText="Artist">
                     <ItemTemplate>
-                      <%--  <asp:Label ID="Label4" runat="server" Text='<%#Eval("ArtistId") %>'></asp:Label>--%>
-                        <asp:DropDownList ID="ArtistListGV" runat="server" 
-                            DataSourceID="ArtistListGVODS" 
-                            DataTextField="DisplayText" 
+                        <%--  <asp:Label ID="Label4" runat="server" Text='<%#Eval("ArtistId") %>'></asp:Label>--%>
+                        <asp:DropDownList ID="ArtistListGV" runat="server"
+                            DataSourceID="ArtistListGVODS"
+                            DataTextField="DisplayText"
                             DataValueField="ValueId"
                             SelectedValue='<%#Eval("ArtistId") %>'
                             Width="300px"
                             Enabled="false">
-
                         </asp:DropDownList>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Left"></ItemStyle>
@@ -53,7 +50,7 @@
 
                 <asp:TemplateField HeaderText="Year Released">
                     <ItemTemplate>
-                        <asp:Label ID="Label6" runat="server" 
+                        <asp:Label ID="Label6" runat="server"
                             Text='<%#Eval("ReleaseYear") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Center"></ItemStyle>
@@ -61,7 +58,7 @@
 
                 <asp:TemplateField HeaderText="Label">
                     <ItemTemplate>
-                        <asp:Label ID="Label5" runat="server" 
+                        <asp:Label ID="Label5" runat="server"
                             Text='<%#Eval("ReleaseLabel") %>'></asp:Label>
                     </ItemTemplate>
                     <ItemStyle HorizontalAlign="Left"></ItemStyle>

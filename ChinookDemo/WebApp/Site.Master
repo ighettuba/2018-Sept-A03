@@ -116,6 +116,10 @@
                                         href="~/SamplePages/GridViewODS.aspx"
                                         style="color:black" runat="server">
                                    Grid View Using ODS</a>
+                                 <a class="dropdown-item"
+                                        href="~/SamplePages/LinqPadToAppQuery.aspx"
+                                        style="color:black" runat="server">
+                                   Move LinqPad Query To Web App</a>
                             </div>
                          </li>
                          <li class="nav-item">
