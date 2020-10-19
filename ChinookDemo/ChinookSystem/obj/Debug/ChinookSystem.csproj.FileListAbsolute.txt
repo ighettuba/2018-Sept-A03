@@ -21,4 +21,3 @@ C:\Users\ghett\Documents\DMIT-2018-A03\2018-Sept-A031\ChinookDemo\ChinookSystem\
 C:\Users\ghett\Documents\DMIT-2018-A03\2018-Sept-A031\ChinookDemo\ChinookSystem\obj\Debug\ChinookSystem.csproj.CopyComplete
 C:\Users\ghett\Documents\DMIT-2018-A03\2018-Sept-A031\ChinookDemo\ChinookSystem\obj\Debug\ChinookSystem.dll
 C:\Users\ghett\Documents\DMIT-2018-A03\2018-Sept-A031\ChinookDemo\ChinookSystem\obj\Debug\ChinookSystem.pdb
-C:\Users\ghett\Documents\DMIT-2018-A03\2018-Sept-A031\ChinookDemo\ChinookSystem\obj\Debug\ChinookSystem.csprojAssemblyReference.cache
