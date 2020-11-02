@@ -18,6 +18,10 @@ namespace DMIT2018Common.UserControls
         {
             this.RuleDetails = reasons;
         }
+
+        public BusinessRuleException()
+        {
+        }
     }
 
 }
