@@ -6,15 +6,18 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %></title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
     <webopt:bundlereference runat="server" path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
-    <%-- Link to customized css --%>
+    <%-- link to personalization custom css file --%>
     <link href="Content/CustomStyles.css" rel="stylesheet" />
+        <%--<link href="css/font-awesome.min.css" rel="stylesheet" />--%>
+    <%-- font-awesome in bootstrap 3 --%>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 </head>
 <body>
     <form runat="server">
@@ -37,9 +40,8 @@
                 <%--Site Scripts--%>
             </Scripts>
         </asp:ScriptManager>
-
-            <%--   Supplied Start up menu--%>
-       <%--   <div class="navbar navbar-inverse navbar-fixed-top">
+        <%-- supplied startup menu --%>
+<%--        <div class="navbar navbar-inverse navbar-fixed-top">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -73,8 +75,8 @@
                     </asp:LoginView>
                 </div>
             </div>
-        </div> --%>
-        <%--   Add workable Bootstrap 4 Menu--%>
+        </div>--%>
+        <%-- Add a workable Bootstrap 4 menu --%>
         <div class="container">
       <div class="navbar navbar-inverse">
           <nav class="navbar navbar-expand-md navbar-light fixed-top">
@@ -104,30 +106,30 @@
                                         href="~/SamplePages/TestPage.aspx"
                                         style="color:black" runat="server">
                                    Test Page</a>
-                                <a class="dropdown-item"
+                                 <a class="dropdown-item"
                                         href="~/SamplePages/SearchByDDL.aspx"
                                         style="color:black" runat="server">
-                                   Search By Artist</a>
-                                 <a class="dropdown-item"
+                                   Search Filter Demo</a>
+                                <a class="dropdown-item"
                                         href="~/SamplePages/ListViewODSCRUD.aspx"
                                         style="color:black" runat="server">
-                                   List View CRUD</a>
-                                 <a class="dropdown-item"
+                                   ODS CRUD using ListView</a>
+                                <a class="dropdown-item"
                                         href="~/SamplePages/GridViewODS.aspx"
                                         style="color:black" runat="server">
-                                   Grid View Using ODS</a>
-                                 <a class="dropdown-item"
+                                   ODS using GridView</a>
+                                <a class="dropdown-item"
                                         href="~/SamplePages/LinqPadToAppQuery.aspx"
                                         style="color:black" runat="server">
-                                   Move LinqPad Query To Web App</a>
+                                   Move LinqPad query to web app</a>
                                 <a class="dropdown-item"
                                         href="~/SamplePages/ODSRepeater.aspx"
                                         style="color:black" runat="server">
-                                   Repeater control using Nested Query</a>
+                                   Repeater Control using nested query</a>
                                  <a class="dropdown-item"
-                                        href="~/SamplePages/ManagePlayList.aspx"
+                                        href="~/SamplePages/ManagePlaylist.aspx"
                                         style="color:black" runat="server">
-                                   OLTP Manage playlist Page</a>
+                                   OLTP Sample Manage Playlist</a>
                             </div>
                          </li>
                          <li class="nav-item">
@@ -166,8 +168,7 @@
             </div>
         </div>
 
-
-        <div class="container fluid">
+        <div class="container-fluid">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>
             <hr />

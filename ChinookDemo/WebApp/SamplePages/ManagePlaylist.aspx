@@ -66,7 +66,8 @@
                     <td>
                         <asp:LinkButton ID="AddtoPlaylist" runat="server"
                              CssClass="btn" CommandArgument='<%# Eval("TrackID") %>'>
-                            <span aria-hidden="true" class="glyphicon glyphicon-plus">&nbsp;</span>
+                            <i class="fa fa-plus" style="color:red; font-size:2em"></i>&nbsp;
+                            <%--<span aria-hidden="true" class="glyphicon glyphicon-plus">&nbsp;</span>--%>
                         </asp:LinkButton>
                         </td>
                     <td>
@@ -103,7 +104,10 @@
                     <td>
                        <asp:LinkButton ID="AddtoPlaylist" runat="server"
                              CssClass="btn" CommandArgument='<%# Eval("TrackID") %>'>
-                            <span aria-hidden="true" class="glyphicon glyphicon-plus">&nbsp;</span>
+                               <i class="far fa-plus-square"style="color:blue; font-size:2em"></i>
+
+<%--                           <i class="fa fa-plus" style="color:red;"></i>&nbsp;--%>
+                           <%-- <span aria-hidden="true" class="glyphicon glyphicon-plus">&nbsp;</span>--%>
                         </asp:LinkButton>
                     </td>
                     <td>
@@ -173,16 +177,19 @@
         <%--enter 3 linkbuttons for move up, move down and delete--%>
         <asp:LinkButton ID="MoveUp" runat="server"
                 CssClass="btn" OnClick="MoveUp_Click"  >
-            <span aria-hidden="true" class="glyphicon glyphicon-chevron-up"></span>
+             <i class="fa fa-chevron-up" style="color:blue; font-size:2em"></i>&nbsp;
+           <%-- <span aria-hidden="true" class="glyphicon glyphicon-chevron-up"></span>--%>
         </asp:LinkButton>&nbsp;&nbsp;
         <asp:LinkButton ID="MoveDown" runat="server"
                 CssClass="btn" OnClick="MoveDown_Click" >
-            <span aria-hidden="true" class="glyphicon glyphicon-chevron-down"></span>
+            <i class="fa fa-chevron-down" style="color:blue; font-size:2em;"></i>&nbsp;
+            <%--<span aria-hidden="true" class="glyphicon glyphicon-chevron-down"></span>--%>
         </asp:LinkButton>&nbsp;&nbsp;
         <asp:LinkButton ID="DeleteTrack" runat="server"
                 CssClass="btn" OnClick="DeleteTrack_Click"  >
-            <span aria-hidden="true" class="glyphicon glyphicon-remove"
-                 style="color:red"></span>
+            <i class="fa fa-times" style="color:red;font-size:2em;"></i>&nbsp;
+           <%-- <span aria-hidden="true" class="glyphicon glyphicon-remove"
+                 style="color:red"></span>--%>
         </asp:LinkButton>
         <br /><br />
         <asp:GridView ID="PlayList" runat="server" AutoGenerateColumns="False"
@@ -221,13 +228,13 @@
                     <ItemTemplate>
                           
                         <asp:Label runat="server" ID="UnitPrice"
-                            Text='<%# string.Format("0:0.00",Eval("UnitPrice")) %>'></asp:Label>
+                            Text='<%# string.Format("{0:0.00}",Eval("UnitPrice")) %>'></asp:Label>
                     </ItemTemplate>
                 </asp:TemplateField>
             </Columns>
             <EmptyDataTemplate>
-            No data to view for the playlist.
-        </EmptyDataTemplate>
+                    No data to view for the playlist.
+            </EmptyDataTemplate>
         </asp:GridView>
     </div>
 
@@ -244,11 +251,11 @@
         <SelectParameters>
             <asp:ControlParameter ControlID="TracksBy" 
                 PropertyName="Text" 
-                Name="tracksby" DefaultValue="none"
+                Name="tracksby"  DefaultValue="none"
                 Type="String"></asp:ControlParameter>
             <asp:ControlParameter ControlID="SearchArg" 
                 PropertyName="Text" 
-                Name="arg" DefaultValue="none"
+                Name="arg"  DefaultValue="none"
                 Type="String"></asp:ControlParameter>
         </SelectParameters>
     </asp:ObjectDataSource>

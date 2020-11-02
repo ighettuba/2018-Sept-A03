@@ -212,8 +212,32 @@ namespace WebApp.SamplePages
         protected void TracksSelectionList_ItemCommand(object sender,
             ListViewCommandEventArgs e)
         {
-            //code to go here
-
+            string username = "HansenB";
+            //validation of incoming data
+            if(string.IsNullOrEmpty(PlaylistName.Text))
+            {
+                MessageUserControl.ShowInfo("Missing Data", "Enter the playlist name");
+            }
+            else
+            {
+                //REMINDER: Message User control will do the error handling
+                MessageUserControl.TryRun(() =>
+                {
+                    //Coding block for logic to be run under the error handling
+                    //control or the MessageUserControl
+                    //a standard add to teh database
+                    //connect to controller
+                    PlaylistTracksController sysmgr = new PlaylistTracksController();
+                    //issue call to the controller method
+                    sysmgr.Add_TrackToPLaylist(PlaylistName.Text, username, int.Parse(e.CommandArgument.ToString()));
+                    //refresh the playlist
+                    List<UserPlaylistTrack> info = sysmgr.List_TracksForPlaylist(PlaylistName.Text, username);
+                    //assign the results to the control
+                    PlayList.DataSource = info;
+                    //bind resutls to control
+                    PlayList.DataBind();
+                }, "Add track to PlayList", "Track has been added to playlist");
+            }
         }
 
     }
