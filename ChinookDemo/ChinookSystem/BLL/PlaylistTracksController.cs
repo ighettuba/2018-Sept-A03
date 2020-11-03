@@ -10,6 +10,7 @@ using ChinookSystem.DAL;
 using System.ComponentModel;
 using ChinookSystem.Entities;
 using DMIT2018Common.UserControls;
+using System.Diagnostics;
 #endregion
 
 namespace ChinookSystem.BLL
@@ -52,7 +53,7 @@ namespace ChinookSystem.BLL
 
                 int trackNumber = 0;
                 PlaylistTrack newtrack = null;
-                List<string> errors = new List<string> //for use by BusinessRuleException
+                List<string> errors = new List<string>(); //for use by BusinessRuleException
                 Playlist exists = (from x in context.Playlists
                                    where x.Name.Equals(playlistname) 
                                         && x.UserName.Equals(username)
@@ -114,6 +115,29 @@ namespace ChinookSystem.BLL
                     }
                 }
 
+                //create/load/add a PlaylistTrack 
+                newtrack = new PlaylistTrack();
+                //load instance Data
+                newtrack.TrackId = trackid;
+                newtrack.TrackNumber = trackNumber;
+
+                //scenario 1. This is a New playlist
+                //      the exists instance is a new instance that is  YET
+                //          to be placed on the SQL database
+                //  THEREFORE it DOES NOT yet have a primary key value!!!!!!!!
+                //  the current value of the playlistId on the exist instance 
+                //      is the Default system value for an integer(0)
+                //scenario 2. This is an existing playlist
+                //      the exists instance has the playlist ID value
+              
+
+                //the solution to both these scenarios is to use 
+                //  navigational properties during the ACTUAL .Add command
+                //the entityframework will, on your behalf, ensure that the 
+                //  adding of records to the database will be done in the 
+                //  appropriate order and the missing compound primary key
+                //  value(playlistId) to the child record new track
+                exists.PlaylistTracks.Add(newtrack);            //Staged Data
 
                 //Handle creation of playlist track record
                 //all validation has been passed??????????
@@ -125,9 +149,11 @@ namespace ChinookSystem.BLL
                 else
                 {
                     //good to go
+                    //commit the Staged work to the database
+                    context.SaveChanges();
 
                 }
-                //commit the work via entityFramwork (ADO.net) to the database
+                
 
 
             }// this ensures that the sql connection closes properly
@@ -136,8 +162,75 @@ namespace ChinookSystem.BLL
         {
             using (var context = new ChinookSystemContext())
             {
-                //code to go here 
 
+                //trx
+                //check to see if the playlist exists
+                //no:   error exception
+                //yes:  
+                //  Check to see if song exists
+                //  no:     error exception
+                //  yes:    
+                //      check to see if song is at the top
+                //      yes:    error exception
+                //      no:     
+                //          find record above (tracknumber-1
+                //          change above record tracknumber modified to tracknumber + 1
+                //          selected record tracnumber modified to tracknumbere - 1
+                //check to see if song is at the botom
+                //      yes:    error exception
+                //      no:     
+                //          find record above (tracknumber+1
+                //          change above record tracknumber modified to tracknumber - 1
+                //          selected record tracnumber modified to tracknumbere + 1
+                //stage records
+                //commit
+                PlaylistTrack moveTrack = null;
+                PlaylistTrack otherTrack = null;
+
+                List<string> errors = new List<string>(); //for use by BusinessRuleException
+                Playlist exists = (from x in context.Playlists
+                                   where x.Name.Equals(playlistname)
+                                        && x.UserName.Equals(username)
+                                   select x).FirstOrDefault();
+                //if not
+                if (exists == null)
+                {
+                    errors.Add("Playlist does not exist");
+                }
+                else
+                {
+                    moveTrack = (from x in context.PlaylistTracks
+                                 where x.Playlist.Name.Equals(playlistname)
+                                      && x.Playlist.UserName.Equals(username)
+                                      && x.TrackId ==trackid
+                                 select x).FirstOrDefault();
+                    if (moveTrack == null)
+                    {
+                        errors.Add("Playlist track does not exist");
+
+                    }
+                    else
+                    {
+                        if (direction.Equals("up"))         //Move Uo
+                        {
+
+                        }
+                        else                               //Move Down
+                        {
+
+                        }
+                    }
+                }
+                if (errors.Count > 0)
+                {
+                    throw new BusinessRuleException("Move Track", errors);
+                }
+                else
+                {
+                    //stage
+                    //commit
+                    context.SaveChanges();
+                }
             }
         }//eom
 
