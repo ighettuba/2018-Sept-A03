@@ -169,20 +169,22 @@ namespace ChinookSystem.BLL
                 //yes:  
                 //  Check to see if song exists
                 //  no:     error exception
-                //  yes:    
-                //      check to see if song is at the top
-                //      yes:    error exception
-                //      no:     
-                //          find record above (tracknumber-1
-                //          change above record tracknumber modified to tracknumber + 1
-                //          selected record tracnumber modified to tracknumbere - 1
-                //check to see if song is at the botom
-                //      yes:    error exception
-                //      no:     
-                //          find record above (tracknumber+1
-                //          change above record tracknumber modified to tracknumber - 1
-                //          selected record tracnumber modified to tracknumbere + 1
-                //stage records
+                //  yes:
+                ////      //up:
+                ////      //check to see if song is at the top
+                ////      //yes:    error exception
+                ////     // no:     
+                ////          //find record above (tracknumber-1
+                ////          //change above record tracknumber modified to tracknumber + 1
+                ////          //selected record tracnumber modified to tracknumbere - 1
+                ////      //down:
+                ////          //check to see if song is at the botom
+                ////      //yes:    error exception
+                ////      //no:     
+                ////          //find record above (tracknumber+1
+                ////          //change above record tracknumber modified to tracknumber - 1
+                ////          //selected record tracnumber modified to tracknumbere + 1
+                ////stage records
                 //commit
                 PlaylistTrack moveTrack = null;
                 PlaylistTrack otherTrack = null;
@@ -213,11 +215,61 @@ namespace ChinookSystem.BLL
                     {
                         if (direction.Equals("up"))         //Move Uo
                         {
+                            //this means the track number of the selectred track 
+                            //  will decrease (track 4 => 3)
 
+                            //preparation for move, check if the track is at the top of the list
+                            if(moveTrack.TrackNumber == 1)
+                            {
+                                errors.Add("song on playlist already at the top");
+                            }
+                            else
+                            {
+                                //Manipulation of the actual records
+                                //the following test conditions identify the playlistID value
+                                // x.Playlist.Name.Equals(playlistname)
+                                // x.Playlist.UserName.Equals(username)
+                                otherTrack = (from x in exists.PlaylistTracks
+                                              where x.TrackNumber == tracknumber - 1
+                                              && x.Playlist.Name.Equals(playlistname)
+                                              && x.Playlist.UserName.Equals(username)
+                                              select x).FirstOrDefault();
+                                if (otherTrack == null)
+                                {
+                                    errors.Add("Missing required  other song record.");
+                                }
+                                else
+                                {
+                                    moveTrack.TrackNumber -= 1;
+                                    otherTrack.TrackNumber += 1;
+                                }
+                            }
                         }
                         else                               //Move Down
                         {
-
+                            if (moveTrack.TrackNumber == exists.PlaylistTracks.Count)
+                            {
+                                errors.Add("song on playlist already at the bottom");
+                            }
+                            else
+                            {
+                                //Manipulation of the actual records
+                                //(track 4->5)
+                                otherTrack = (from x in exists.PlaylistTracks
+                                              where x.TrackNumber == tracknumber + 1
+                                              && x.Playlist.Name.Equals(playlistname)
+                                              && x.Playlist.UserName.Equals(username)
+                                              select x).FirstOrDefault();
+                                if (otherTrack == null)
+                                {
+                                    errors.Add("Missing required  other song record.");
+                                }
+                                else
+                                {
+                                    moveTrack.TrackNumber += 1;
+                                    otherTrack.TrackNumber -= 1;
+                                }
+                            }
                         }
                     }
                 }
@@ -227,7 +279,13 @@ namespace ChinookSystem.BLL
                 }
                 else
                 {
-                    //stage
+                    //stage changes
+                    //a)you can stage an update to alter the entire entity
+                    //b) you can stage an update to an entity referencing JUST the property 
+                    //      to be modified
+                    //in this example B will be used
+                    context.Entry(moveTrack).Property("TrackNumber").IsModified = true;
+                    context.Entry(otherTrack).Property(nameof(PlaylistTrack.TrackNumber)).IsModified = true;
                     //commit
                     context.SaveChanges();
                 }
