@@ -348,7 +348,7 @@ namespace WebApp.SamplePages
                             trackids.Add(int.Parse((PlayList.Rows[i].FindControl("TrackId") as Label).Text));
                         }
                     }
-
+                    //was a song selected
                     if (rowsSelected == 0)
                     {
                         MessageUserControl.ShowInfo("Tack Removal", "You must select a track to remove");

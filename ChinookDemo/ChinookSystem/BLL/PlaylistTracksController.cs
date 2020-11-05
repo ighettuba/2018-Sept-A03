@@ -342,14 +342,23 @@ namespace ChinookSystem.BLL
 
                         }
 
-                        int number = 1;
-                        foreach (var track in trackskept)
-                        {
-                            track.TrackNumber = number;
-                            context.Entry(track).Property(nameof(PlaylistTrack.TrackNumber)).IsModified = true;
-                            number++;
-                        }
+                     }   
+                    int number = 1;
+                    foreach (var track in trackskept)
+                    {
+                        track.TrackNumber = number;
+                        context.Entry(track).Property(nameof(PlaylistTrack.TrackNumber)).IsModified = true;
+                        number++;
+                    }                    
+                    if (errors.Count > 0)
+                    {
+                        throw new BusinessRuleException("Delete Track", errors);
                     }
+                    else
+                    {
+                        context.SaveChanges();
+                    }
+
                 }
             }
         }//eom
